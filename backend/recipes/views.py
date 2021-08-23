@@ -89,7 +89,7 @@ class FavoriteViewSet(APIView):
         user = request.user
         recipe = get_object_or_404(Recipe, id=recipe_id)
 
-        Favorite.objects.get(
+        Favorite.objects.get_object_or_404(
             user=user,
             recipe=recipe).delete()
         return Response(
@@ -117,7 +117,7 @@ class ShoppingCartViewSet(APIView):
         user = request.user
         recipe = get_object_or_404(Recipe, id=recipe_id)
 
-        ShoppingCart.objects.get(user=user, recipe=recipe).delete()
+        ShoppingCart.objects.get_object_or_404(user=user, recipe=recipe).delete()
         return Response(
             status=status.HTTP_204_NO_CONTENT
         )
@@ -168,7 +168,7 @@ class ListFollowViewSet(generics.ListAPIView):
 
     def get_queryset(self):
         user = self.request.user
-        return User.objects.filter(following__user=user)
+        return user.follower.get()
 
 
 class FollowViewSet(APIView):
