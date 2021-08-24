@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Recipe, Ingredient, Tag, ShoppingCart, Favorite
+from .models import Recipe, Ingredient, Tag, ShoppingCart, Favorite, Follow
 
 
 @admin.register(Recipe)
@@ -61,4 +61,16 @@ class ShoppingCartAdmin(admin.ModelAdmin):
     search_fields = (
         'user',
         'recipe'
+    )
+
+@admin.register(Follow)
+class FollowAdmin(admin.ModelAdmin):
+    list_display = (
+        'id',
+        'user',
+        'author',
+        'created_at'
+    )
+    search_fields = (
+        'user',
     )

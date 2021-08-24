@@ -168,8 +168,7 @@ class ListFollowViewSet(generics.ListAPIView):
 
     def get_queryset(self):
         user = self.request.user
-        return user.follower.get()
-
+        return User.objects.filter(following__user=user) 
 
 class FollowViewSet(APIView):
     permission_classes = [IsAuthenticated, ]
