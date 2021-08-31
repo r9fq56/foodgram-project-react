@@ -97,6 +97,12 @@ class RecipeIngredient(models.Model):
     class Meta:
         verbose_name = 'Ингредиенты'
         verbose_name_plural = verbose_name
+        constraints = [
+            models.UniqueConstraint(
+                fields=['ingredient', 'recipe'],
+                name='recipe_ingredient_unique',
+            )
+        ]
 
 
 class ReceiptTag(models.Model):

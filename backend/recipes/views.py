@@ -89,9 +89,11 @@ class FavoriteViewSet(APIView):
         user = request.user
         recipe = get_object_or_404(Recipe, id=recipe_id)
 
-        Favorite.objects.get_object_or_404(
-            user=user,
-            recipe=recipe).delete()
+        # Favorite.objects.get(
+        #     user=user,
+        #     recipe=recipe).delete()
+        obj = get_object_or_404(Favorite, user=user, recipe=recipe)
+        obj.delete()
         return Response(
             status=status.HTTP_204_NO_CONTENT
         )
@@ -117,7 +119,9 @@ class ShoppingCartViewSet(APIView):
         user = request.user
         recipe = get_object_or_404(Recipe, id=recipe_id)
 
-        ShoppingCart.objects.get_object_or_404(user=user, recipe=recipe).delete()
+        # ShoppingCart.objects.get(user=user, recipe=recipe).delete()
+        obj = get_object_or_404(ShoppingCart, user=user, recipe=recipe)
+        obj.delete()
         return Response(
             status=status.HTTP_204_NO_CONTENT
         )
